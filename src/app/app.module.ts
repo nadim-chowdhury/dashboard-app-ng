@@ -10,6 +10,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { SmallCardComponent } from './small-card/small-card.component';
 import { BigCardComponent } from './big-card/big-card.component';
+import { TallCardComponent } from './tall-card/tall-card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BigCardComponent } from './big-card/big-card.component';
     SidebarComponent,
     DashboardHomeComponent,
     SmallCardComponent,
-    BigCardComponent
+    BigCardComponent,
+    TallCardComponent
   ],
   imports: [
     BrowserModule,
