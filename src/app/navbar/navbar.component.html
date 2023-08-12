@@ -1,5 +1,45 @@
-<nav class="py-6 bg-white border-b">
-  <h1 class="uppercase text-xl font-bold ml-4">
+<nav class="py-6 bg-white border-b flex items-center sticky top-0 z-20">
+  <h1 class="uppercase text-2xl font-bold pl-6 pr-20 border-r tracking-widest">
     Hello<span class="text-blue-500">World</span>
   </h1>
+
+  <div class="w-full flex justify-between items-center mx-6">
+    <div>
+      <span class="text-lg mr-6"><i class="fa-solid fa-bars"></i></span>
+
+      <input
+        type="text"
+        placeholder="Search"
+        class="px-4 py-1 bg-blue-100 rounded-lg"
+      />
+    </div>
+
+    <div class="flex items-center">
+      <div class="flex items-center mr-6">
+        <div class="navbar_item mr-2">
+          <i class="fa-solid fa-globe"></i>
+        </div>
+        <div class="navbar_item mr-2">
+          <i class="fa-solid fa-expand"></i>
+        </div>
+        <div class="navbar_item mr-2">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+        <div class="navbar_item">
+          <i class="fa-solid fa-gear"></i>
+        </div>
+      </div>
+
+      <div class="flex items-center">
+        <div class="navbar_item">
+          <i class="fa-solid fa-user"></i>
+        </div>
+
+        <div class="ml-2">
+          <h4 class="text-sm">Username</h4>
+          <p class="text-xs text-gray-500">User role</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>
