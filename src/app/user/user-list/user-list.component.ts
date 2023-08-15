@@ -7,177 +7,176 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styles: []
+  styles: [],
 })
 export class UserListComponent implements OnInit {
   UserList: any[];
   UnAuthUserList: any[];
+
   constructor(
-    public service : UserService,
+    public service: UserService,
     private toastr: ToastrService,
     private modalService: NgbModal
-
-  ) { }
+  ) {
+    this.UserList = [];
+    this.UnAuthUserList = [];
+  }
 
   ngOnInit() {
     this.getData();
     this.getUnAuthData();
   }
   inactive(id: string, isActive: boolean) {
-    if(confirm("Are you sure to inactive/active this information?")) {
-      this.service.inactiveUser(id,isActive).subscribe(
+    if (confirm('Are you sure to inactive/active this information?')) {
+      this.service.inactiveUser(id, isActive).subscribe(
         (res: any) => {
-          
-
           if (res.isSuccessfull) {
             this.getData();
-            this.toastr.warning('Data updated!', 'Record successfully updated.');
+            this.toastr.warning(
+              'Data updated!',
+              'Record successfully updated.'
+            );
           } else {
             this.toastr.error('Ops! Something went worng!', res.message);
           }
         },
-        err => {
+        (err) => {
           console.log(err);
-     
         }
       );
     }
   }
-  unlock(id: string){
-    if(confirm("Are you sure to unlock this user?")) {
+  unlock(id: string) {
+    if (confirm('Are you sure to unlock this user?')) {
       this.service.unlock(id).subscribe(
         (res: any) => {
-          
-
           if (res.isSuccessfull) {
             this.getData();
-            this.toastr.warning('Data updated!', 'Record successfully updated.');
+            this.toastr.warning(
+              'Data updated!',
+              'Record successfully updated.'
+            );
           } else {
             this.toastr.error('Ops! Something went worng!', res.message);
           }
         },
-        err => {
+        (err) => {
           console.log(err);
-     
         }
       );
     }
   }
-  newEntry(){
-    this.service.formModel.reset()
+  newEntry() {
+    this.service.formModel.reset();
     const modalRef = this.modalService.open(UserFormComponent);
     modalRef.componentInstance.my_modal_title = 'Application User Entry';
- 
 
-    modalRef.result.then((result) => {
-      if ( result === 'Close click' ) {
-        this.getData(); // Refresh Data in table grid
-      }
-    }, (reason) => {
-    });
-  }
-  authorize(id) {
-    if(confirm("Are you sure to authorize this user?")) {
-    this.service.authorizeUser(id).subscribe(
-      (res: any) => {
-        
-        if (res.isSuccessfull) {
-          this.getData();
-          this.getUnAuthData();
-          this.toastr.warning('Data saved!', res.message);
-        } else {
-          this.toastr.error('Ops! Something went worng!', res.message);
+    modalRef.result.then(
+      (result) => {
+        if (result === 'Close click') {
+          this.getData(); // Refresh Data in table grid
         }
       },
-      err => {
-        console.log(err);
-
-        this.toastr.error('Ops! Something went worng!', err.error.message);
-      }
+      (reason) => {}
     );
+  }
+  authorize(id: string) {
+    if (confirm('Are you sure to authorize this user?')) {
+      this.service.authorizeUser(id).subscribe(
+        (res: any) => {
+          if (res.isSuccessfull) {
+            this.getData();
+            this.getUnAuthData();
+            this.toastr.warning('Data saved!', res.message);
+          } else {
+            this.toastr.error('Ops! Something went worng!', res.message);
+          }
+        },
+        (err) => {
+          console.log(err);
+
+          this.toastr.error('Ops! Something went worng!', err.error.message);
+        }
+      );
     }
   }
-  getData(){
+  getData() {
     this.service.getAllUsers().subscribe(
-      (res:any) =>{
-      
-        this.UserList=res.data;
+      (res: any) => {
+        this.UserList = res.data;
       },
-      err =>{
+      (err) => {
         console.log(err);
       }
     );
   }
 
-  getUnAuthData(){
+  getUnAuthData() {
     this.service.getAllUnAuthUsers().subscribe(
-      (res:any) =>{
-        
-        this.UnAuthUserList=res.data;
+      (res: any) => {
+        this.UnAuthUserList = res.data;
       },
-      err =>{
+      (err) => {
         console.log(err);
       }
     );
   }
 
-  edit(id){
-
-    this.service.formModel.reset()
+  edit(id: string) {
+    this.service.formModel.reset();
     const modalRef = this.modalService.open(UserFormComponent);
     modalRef.componentInstance.my_modal_title = 'Application User Update';
     modalRef.componentInstance.id = id;
- 
 
-    modalRef.result.then((result) => {
-      if ( result === 'Close click' ) {
-        this.getData(); // Refresh Data in table grid
-      }
-    }, (reason) => {
-    });
+    modalRef.result.then(
+      (result) => {
+        if (result === 'Close click') {
+          this.getData(); // Refresh Data in table grid
+        }
+      },
+      (reason) => {}
+    );
   }
 
   delete(id: string) {
-    if(confirm("Are you sure to delete this information?")) {
+    if (confirm('Are you sure to delete this information?')) {
       this.service.deleteUser(id).subscribe(
         (res: any) => {
-          
-
           if (res.isSuccessfull) {
             this.getData();
-            this.toastr.warning('Data deleted!', 'Record successfully deleted.');
+            this.toastr.warning(
+              'Data deleted!',
+              'Record successfully deleted.'
+            );
           } else {
             this.toastr.error('Ops! Something went worng!', res.message);
           }
         },
-        err => {
+        (err) => {
           console.log(err);
-     
         }
       );
     }
   }
 
   resetPassword(id: string) {
-    if(confirm("Are you sure to reset password for this user?")) {
+    if (confirm('Are you sure to reset password for this user?')) {
       this.service.resetPassword(id).subscribe(
         (res: any) => {
-          
-
           if (res.isSuccessfull) {
             this.getData();
-            this.toastr.info('Password Reset!', 'New Password: '+res.data, { timeOut: 0 });
+            this.toastr.info('Password Reset!', 'New Password: ' + res.data, {
+              timeOut: 0,
+            });
           } else {
             this.toastr.error('Ops! Something went worng!', res.message);
           }
         },
-        err => {
-          this.toastr.error('Ops! Something went worng!', "");
+        (err) => {
+          this.toastr.error('Ops! Something went worng!', '');
           console.log(err);
-     
         }
       );
     }
   }
-
 }
