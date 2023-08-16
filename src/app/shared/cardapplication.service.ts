@@ -266,10 +266,7 @@ export class CardapplicationService {
       CardApplicationDataId: cardId,
       BankName: this.formModelInvestmentDetails.value.BankName,
       FacilityType: this.formModelInvestmentDetails.value.FacilityType,
-      OutstandingAmount: parseInt(
-        this.formModelInvestmentDetails.value.OutstandingAmount,
-        10
-      ),
+     
       EMI: this.formModelInvestmentDetails.value.EMI,
       Status: this.formModelInvestmentDetails.value.Status,
     };

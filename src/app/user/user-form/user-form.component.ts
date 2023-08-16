@@ -35,7 +35,7 @@ export class UserFormComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private roleService: RoleService,
+    //private roleService: RoleService,
     public service: UserService,
     private toastr: ToastrService,
     private commonService: CommonService
@@ -136,8 +136,8 @@ export class UserFormComponent implements OnInit {
 
         const passwords = this.service.formModel.get('Passwords');
         if (passwords) {
-          passwords.get('Password').setValue('00000');
-          passwords.get('ConfirmPassword').setValue('00000');
+          // passwords.get('Password').setValue('00000');
+          // passwords.get('ConfirmPassword').setValue('00000');
         }
 
         const dbRoles: any[] = [];
@@ -150,7 +150,7 @@ export class UserFormComponent implements OnInit {
               dbRoles.push(matchingRoles[0]);
             }
           });
-          this.service.formModel.controls['selectedRoles'].setValue(dbRoles);
+        //  this.service.formModel.controls['selectedRoles'].setValue(dbRoles);
         }
       },
       (err) => {
@@ -170,15 +170,15 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
-    this.service.formModel.value.selectedRoles.push(item);
+    // this.service.formModel.value.selectedRoles.push(item);
 
-    if (this.service.userSelectedRoles) {
-      this.service.userSelectedRoles.push(item);
-    }
+    // if (this.service.userSelectedRoles) {
+    //   this.service.userSelectedRoles.push(item);
+    // }
 
-    this.service.formModel.controls['selectedRoles'].setValue(
-      this.service.formModel.value.selectedRoles
-    );
+    // this.service.formModel.controls['selectedRoles'].setValue(
+    //   this.service.formModel.value.selectedRoles
+    // );
   }
 
   onSelectAll(items: any[]) {
@@ -212,11 +212,11 @@ export class UserFormComponent implements OnInit {
 
     const result: any[] = selectedRoles.value;
 
-    const filtered = result.filter(
-      (m: any) => m.normalizedName !== item.normalizedName
-    );
+    // Array[] filtered = result.filter(
+    //   (m: any) => m.normalizedName !== item.normalizedName
+    // );
 
-    selectedRoles.setValue(filtered);
+    // selectedRoles.setValue(filtered);
   }
 
   onDeSelectAll() {
@@ -225,6 +225,6 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
-    this.service.formModel.controls['selectedRoles'].setValue([]);
+    //this.service.formModel.controls['selectedRoles'].setValue([]);
   }
 }

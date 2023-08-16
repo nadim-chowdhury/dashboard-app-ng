@@ -49,17 +49,17 @@ public userRoles;
   comparePasswords(fb: FormGroup) {
     let confirmPassCtr = fb.get('ConfirmPassword');
 
-    if (confirmPassCtr.errors == null || 'passwordMismatch' in confirmPassCtr.errors) {
-      if (fb.get('Password').value != confirmPassCtr.value)
-        confirmPassCtr.setErrors({ passwordMismatch: true });
+    if (confirmPassCtr?.errors == null || 'passwordMismatch' in confirmPassCtr.errors) {
+      if (fb.get('Password')?.value != confirmPassCtr?.value)
+        confirmPassCtr?.setErrors({ passwordMismatch: true });
       else
-        confirmPassCtr.setErrors(null);
+        confirmPassCtr?.setErrors(null);
     }
 
   }
 
-  isInRole( roles) {
-  var userRoles = JSON.parse(this.userRoles);
+  isInRole( roles:String) {
+  var userRoles = JSON.parse(this.userRoles??"");
    
       try {
 
@@ -86,9 +86,9 @@ public userRoles;
      
   }
   register() {
-    if (this.formModel.value.selectedRoles.length<1) {
-      this.toastr.warning('Error!',"Please select user roles!");
-    }
+    // if (this.formModel?.value?.selectedRoles?.length<1) {
+    //   this.toastr.warning('Error!',"Please select user roles!");
+    // }
     try {
       var body = {
         Id: this.formModel.value.Id,
@@ -112,16 +112,12 @@ public userRoles;
   saveUser() {
     try {
 
-const normalizedRoles = [];
+  
 
 debugger;
-if (this.formModel.value.selectedRoles && this.formModel.value.selectedRoles.length<1) {
-  this.toastr.warning('Error!',"Please select user roles!");
-}
 
-this.formModel.value.selectedRoles.forEach(element => {
-        normalizedRoles.push(element.normalizedName);
-});
+
+
 
       if (this.formModel.value.Id) {
 
@@ -133,7 +129,7 @@ this.formModel.value.selectedRoles.forEach(element => {
           FullName: this.formModel.value.FullName,
           Role: this.formModel.value.Role,
           Branch: this.formModel.value.Branch,
-          Roles:normalizedRoles
+         // Roles:normalizedRoles
         };
 
         return this.http.post(this.BaseURI + 'ApplicationUser/Register', bodyEdit);
@@ -147,7 +143,7 @@ this.formModel.value.selectedRoles.forEach(element => {
           FullName: this.formModel.value.FullName,
           RoleName: this.formModel.value.Role,
           Branch: this.formModel.value.Branch,
-          Roles:normalizedRoles
+         // Roles:normalizedRoles
         };
 
         return this.http.post(this.BaseURI + 'UnAuthApplicationUser', body);
@@ -158,10 +154,10 @@ this.formModel.value.selectedRoles.forEach(element => {
       console.log(error);
     }
   }
-  delete(id) {
+  delete( id:String) {
     return this.http.delete(this.BaseURI + 'UnAuthApplicationUser' + '/' + id);
   }
-  authorizeUser(id) {
+  authorizeUser(id:String) {
     return this.http.get(this.BaseURI + 'UnAuthApplicationUser' + '/AuthorizeUser?id=' + id);
   }
   changePassword() {
@@ -180,7 +176,7 @@ this.formModel.value.selectedRoles.forEach(element => {
   resetPassword(id) {
     return this.http.get(this.BaseURI + 'ApplicationUser/ResetPassword?userId=' + id);
   }
-  login(formData) {
+  login(formData:any) {
 
     return this.http.post(this.BaseURI + 'ApplicationUser/Login', formData);
   }

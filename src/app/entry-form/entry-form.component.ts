@@ -242,25 +242,25 @@ export class EntryFormComponent implements OnInit {
     this.checked = e;
     const formModelControls = this.service.formModel.controls;
 
-    if (this.checked) {
-      formModelControls['PermanentAddress1'].setValue(
-        formModelControls['ResidentialAddressLine1'].value
-      );
-      formModelControls['PermanentAddress2'].setValue(
-        formModelControls['ResidentialAddressLine2'].value
-      );
-      formModelControls['PermanentPostCode'].setValue(
-        formModelControls['ResidentialPostCode'].value
-      );
-      formModelControls['PermanentDistrict'].setValue(
-        formModelControls['ResidentialDistrict'].value
-      );
-    } else {
-      formModelControls['PermanentAddress1'].setValue('');
-      formModelControls['PermanentAddress2'].setValue('');
-      formModelControls['PermanentPostCode'].setValue('');
-      formModelControls['PermanentDistrict'].setValue('');
-    }
+    // if (this.checked) {
+    //   formModelControls['PermanentAddress1'].setValue(
+    //     formModelControls['ResidentialAddressLine1'].value
+    //   );
+    //   formModelControls['PermanentAddress2'].setValue(
+    //     formModelControls['ResidentialAddressLine2'].value
+    //   );
+    //   formModelControls['PermanentPostCode'].setValue(
+    //     formModelControls['ResidentialPostCode'].value
+    //   );
+    //   formModelControls['PermanentDistrict'].setValue(
+    //     formModelControls['ResidentialDistrict'].value
+    //   );
+    // } else {
+    //   formModelControls['PermanentAddress1'].setValue('');
+    //   formModelControls['PermanentAddress2'].setValue('');
+    //   formModelControls['PermanentPostCode'].setValue('');
+    //   formModelControls['PermanentDistrict'].setValue('');
+    // }
   }
 
   getFormValidationErrors() {

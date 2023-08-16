@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { APP_CONFIG, AppConfig } from '../app-config.module';
 import { Inject } from '@angular/core';
 import {AbstractControl} from '@angular/forms';
-import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,7 @@ export class CommonService {
 public getbranchList() {
   return this.http.get(this.BaseURI+"Common/GetBranchList");
 }
-public getEmpInfo(empId) {
+public getEmpInfo( empId:String) {
   return this.http.get(this.BaseURI+"Common/GetEmployeeInfoById?empId="+empId);
 }
 
@@ -27,9 +26,9 @@ public getEmpInfo(empId) {
 
 static dateVaidator(AC: AbstractControl) {
 
-  if (AC && AC.value && !moment((AC.value.day+"/"+AC.value.month+"/"+AC.value.year), 'D/M/YYYY',true).isValid()) {
-    return {'dateVaidator': true};
-  }
+  // if (AC && AC.value && !moment((AC.value.day+"/"+AC.value.month+"/"+AC.value.year), 'D/M/YYYY',true).isValid()) {
+  //   return {'dateVaidator': true};
+  // }
   return null;
 }
 }
