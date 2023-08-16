@@ -27,24 +27,24 @@ export class UserListComponent implements OnInit {
     this.getUnAuthData();
   }
   inactive(id: string, isActive: boolean) {
-    if (confirm('Are you sure to inactive/active this information?')) {
-      this.service.inactiveUser(id, isActive).subscribe(
-        (res: any) => {
-          if (res.isSuccessfull) {
-            this.getData();
-            this.toastr.warning(
-              'Data updated!',
-              'Record successfully updated.'
-            );
-          } else {
-            this.toastr.error('Ops! Something went worng!', res.message);
-          }
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-    }
+    // if (confirm('Are you sure to inactive/active this information?')) {
+    //   this.service.inactiveUser(id, isActive).subscribe(
+    //     (res: any) => {
+    //       if (res.isSuccessfull) {
+    //         this.getData();
+    //         this.toastr.warning(
+    //           'Data updated!',
+    //           'Record successfully updated.'
+    //         );
+    //       } else {
+    //         this.toastr.error('Ops! Something went worng!', res.message);
+    //       }
+    //     },
+    //     (err) => {
+    //       console.log(err);
+    //     }
+    //   );
+    // }
   }
   unlock(id: string) {
     if (confirm('Are you sure to unlock this user?')) {

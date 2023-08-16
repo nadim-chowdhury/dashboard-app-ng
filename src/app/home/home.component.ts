@@ -5,11 +5,11 @@ import { UserService } from '../shared/user.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styles: []
+  styles: [],
 })
 export class HomeComponent implements OnInit {
-  userDetails;
-  constructor(private router:Router, private service:UserService) { }
+  // userDetails;
+  constructor(private router: Router, private service: UserService) {}
 
   ngOnInit() {
     // this.service.getUserProfile().subscribe(
@@ -21,13 +21,9 @@ export class HomeComponent implements OnInit {
     //   }
     // )
   }
-  onLogout(){
-    
+  onLogout() {
     localStorage.removeItem('token');
 
     this.router.navigate(['/user/login']);
-
   }
-
-
 }

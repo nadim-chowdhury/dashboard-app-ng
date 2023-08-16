@@ -9,10 +9,10 @@ import { ToastrService } from 'ngx-toastr';
   styles: [],
 })
 export class RoleFormComponent implements OnInit {
-  Roles: any[];
-  @Input() my_modal_title;
+  // Roles: any[];
+  // @Input() my_modal_title;
 
-  @Input() id;
+  // @Input() id;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -25,23 +25,24 @@ export class RoleFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.register().subscribe(
-      (res: any) => {
-        if (res.isSuccessfull) {
-          this.toastr.warning('Data saved!', res.message);
-        } else {
-          this.toastr.error('Ops! Something went worng!', res.message);
-        }
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    // this.service.register().subscribe(
+    //   (res: any) => {
+    //     if (res.isSuccessfull) {
+    //       this.toastr.warning('Data saved!', res.message);
+    //     } else {
+    //       this.toastr.error('Ops! Something went worng!', res.message);
+    //     }
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //   }
+    // );
   }
+
   getData() {
     this.service.getRoles().subscribe(
       (res: any) => {
-        this.Roles = res.data;
+        // this.Roles = res.data;
       },
       (err) => {
         console.log(err);

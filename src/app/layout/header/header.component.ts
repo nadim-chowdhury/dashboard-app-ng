@@ -6,32 +6,31 @@ import { Compiler } from '@angular/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styles: []
+  styles: [],
 })
 export class HeaderComponent implements OnInit {
-  userDetails;
-  userRole;
-  userRoles;
-  userName;
-  constructor(private router:Router, public service:UserService,private _compiler: Compiler) { }
+  userDetails: any;
+  userRole?: string;
+  userRoles: any;
+  userName?: string;
+
+  constructor(
+    private router: Router,
+    public service: UserService,
+    private _compiler: Compiler
+  ) {}
 
   ngOnInit() {
-    this.userRole = localStorage.getItem('role');
- 
-   this.userName= localStorage.getItem('userFullName');
-   this.userRoles= localStorage.getItem('UserRoles');
+    this.userRole = localStorage.getItem('role') || '';
 
-   this._compiler.clearCache();
-
-
+    this.userName = localStorage.getItem('userFullName') || '';
+    this.userRoles = localStorage.getItem('UserRoles') || '';
+    this._compiler.clearCache();
   }
-  onLogout(){
-    
+
+  onLogout() {
     localStorage.removeItem('token');
 
     this.router.navigate(['/user/login']);
-
   }
-
-
 }

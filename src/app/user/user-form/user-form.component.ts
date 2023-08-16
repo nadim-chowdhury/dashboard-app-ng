@@ -35,7 +35,7 @@ export class UserFormComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private roleService: RoleService,
+    // private roleService: RoleService,
     public service: UserService,
     private toastr: ToastrService,
     private commonService: CommonService
@@ -85,22 +85,22 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.service) {
-      this.service.saveUser()?.subscribe(
-        (res: any) => {
-          if (res?.isSuccessfull) {
-            this.toastr.warning('Data saved!', res.message);
-          } else {
-            this.toastr.error('Ops! Something went wrong!', res.message);
-          }
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-    } else {
-      console.log('Service is not defined!');
-    }
+    // if (this.service) {
+    //   this.service.saveUser()?.subscribe(
+    //     (res: any) => {
+    //       if (res?.isSuccessfull) {
+    //         this.toastr.warning('Data saved!', res.message);
+    //       } else {
+    //         this.toastr.error('Ops! Something went wrong!', res.message);
+    //       }
+    //     },
+    //     (err) => {
+    //       console.log(err);
+    //     }
+    //   );
+    // } else {
+    //   console.log('Service is not defined!');
+    // }
   }
 
   getRoles() {
@@ -136,8 +136,8 @@ export class UserFormComponent implements OnInit {
 
         const passwords = this.service.formModel.get('Passwords');
         if (passwords) {
-          passwords.get('Password').setValue('00000');
-          passwords.get('ConfirmPassword').setValue('00000');
+          // passwords.get('Password').setValue('00000');
+          // passwords.get('ConfirmPassword').setValue('00000');
         }
 
         const dbRoles: any[] = [];
@@ -150,7 +150,7 @@ export class UserFormComponent implements OnInit {
               dbRoles.push(matchingRoles[0]);
             }
           });
-          this.service.formModel.controls['selectedRoles'].setValue(dbRoles);
+          // this.service.formModel.controls['selectedRoles'].setValue(dbRoles);
         }
       },
       (err) => {
@@ -170,22 +170,22 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
-    this.service.formModel.value.selectedRoles.push(item);
+    // this.service.formModel.value.selectedRoles.push(item);
 
-    if (this.service.userSelectedRoles) {
-      this.service.userSelectedRoles.push(item);
-    }
+    // if (this.service.userSelectedRoles) {
+    //   this.service.userSelectedRoles.push(item);
+    // }
 
-    this.service.formModel.controls['selectedRoles'].setValue(
-      this.service.formModel.value.selectedRoles
-    );
-  }
+    //   this.service.formModel.controls['selectedRoles'].setValue(
+    //     this.service.formModel.value.selectedRoles
+    //   );
+    // }
 
-  onSelectAll(items: any[]) {
-    if (!this.service) {
-      console.log('Service is not defined!');
-      return;
-    }
+    // onSelectAll(items: any[]) {
+    //   if (!this.service) {
+    //     console.log('Service is not defined!');
+    //     return;
+    //   }
 
     const selectedRoles = this.service.formModel.controls['selectedRoles'];
     if (!selectedRoles) {
@@ -193,9 +193,9 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
-    items.forEach((element: any) => {
-      selectedRoles.setValue(element);
-    });
+    // items.forEach((element: any) => {
+    //   selectedRoles.setValue(element);
+    // });
   }
 
   onDeSelect(item: any) {
@@ -216,7 +216,7 @@ export class UserFormComponent implements OnInit {
       (m: any) => m.normalizedName !== item.normalizedName
     );
 
-    selectedRoles.setValue(filtered);
+    // selectedRoles.setValue(filtered);
   }
 
   onDeSelectAll() {
@@ -225,6 +225,6 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
-    this.service.formModel.controls['selectedRoles'].setValue([]);
+    // this.service.formModel.controls['selectedRoles'].setValue([]);
   }
 }

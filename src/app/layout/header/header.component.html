@@ -1,105 +1,147 @@
-<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-climbing-dot">
-    <p style="font-size: 20px; color: white">Loading... Please Wait!</p>
- </ngx-spinner>
- <!-- Navigation Bar-->
- <header id="topnav">
-    <div class="topbar-main">
-       <div class="container-fluid">
-          <!-- Logo container-->
-          <div class="logo">
-             <a routerLink="/home/dashboard" class="logo">
-                <h3 style="color: antiquewhite;">SchoolX</h3>
-             </a>
-          </div>
-          <!-- MENU Start -->
-          <!-- end navbar-custom -->
-          <!-- End Logo container-->
-          <div class="menu-extras topbar-custom">
-             <ul class="navbar-right list-inline float-right mb-0">
-                <!-- language-->
-                <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
-                   <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button"
-                      aria-haspopup="false" aria-expanded="false"><i class="mdi mdi-account-circle m-r-5"></i>
-                   {{userName}} <span class="mdi mdi-chevron-down"></span></a>
-                   <div class="dropdown-menu dropdown-menu-right language-switch" x-placement="top-end"
-                      style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-38px, -15px, 0px);">
-                      <a class="dropdown-item d-block" routerLink="/home/changePassword"><i
-                         class="mdi mdi-settings m-r-5"></i> Change Password</a>
-                      <div class="dropdown-divider"></div>
-                      <a (click)="onLogout()"
-                         class="dropdown-item text-danger"><i class="mdi mdi-power text-danger"></i> Logout</a>
-                   </div>
-                </li>
-                <!-- full screen -->
-                <!-- <li class="dropdown notification-list list-inline-item d-none d-md-inline-block"><a class="nav-link" href="#" id="btn-fullscreen"><i class="mdi mdi-fullscreen noti-icon"></i></a></li>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-climbing-dot"
+>
+  <p style="font-size: 20px; color: white">Loading... Please Wait!</p>
+</ngx-spinner>
+<!-- Navigation Bar-->
+<header id="topnav">
+  <div class="topbar-main">
+    <div class="container-fluid">
+      <!-- Logo container-->
+      <div class="logo">
+        <a routerLink="/home/dashboard" class="logo">
+          <h3 style="color: antiquewhite">SchoolX</h3>
+        </a>
+      </div>
+      <!-- MENU Start -->
+      <!-- end navbar-custom -->
+      <!-- End Logo container-->
+      <div class="menu-extras topbar-custom">
+        <ul class="navbar-right list-inline float-right mb-0">
+          <!-- language-->
+          <li
+            class="dropdown notification-list list-inline-item d-none d-md-inline-block"
+          >
+            <a
+              class="nav-link dropdown-toggle arrow-none"
+              data-toggle="dropdown"
+              href="#"
+              role="button"
+              aria-haspopup="false"
+              aria-expanded="false"
+              ><i class="mdi mdi-account-circle m-r-5"></i> {{ userName }}
+              <span class="mdi mdi-chevron-down"></span
+            ></a>
+            <div
+              class="dropdown-menu dropdown-menu-right language-switch"
+              x-placement="top-end"
+              style="
+                position: absolute;
+                will-change: transform;
+                top: 0px;
+                left: 0px;
+                transform: translate3d(-38px, -15px, 0px);
+              "
+            >
+              <a class="dropdown-item d-block" routerLink="/home/changePassword"
+                ><i class="mdi mdi-settings m-r-5"></i> Change Password</a
+              >
+              <div class="dropdown-divider"></div>
+              <a (click)="onLogout()" class="dropdown-item text-danger"
+                ><i class="mdi mdi-power text-danger"></i> Logout</a
+              >
+            </div>
+          </li>
+          <!-- full screen -->
+          <!-- <li class="dropdown notification-list list-inline-item d-none d-md-inline-block"><a class="nav-link" href="#" id="btn-fullscreen"><i class="mdi mdi-fullscreen noti-icon"></i></a></li>
                    -->
-                <li class="menu-item list-inline-item">
-                   <!-- Mobile menu toggle-->
-                   <a class="navbar-toggle nav-link">
-                      <div class="lines"><span></span> <span></span> <span></span></div>
-                   </a>
-                   <!-- End mobile menu toggle-->
-                </li>
-             </ul>
-          </div>
-          <!-- <li class="float-right dropdown notification-list list-inline-item" style="margin-top: 18px;">
+          <li class="menu-item list-inline-item">
+            <!-- Mobile menu toggle-->
+            <a class="navbar-toggle nav-link">
+              <div class="lines"><span></span> <span></span> <span></span></div>
+            </a>
+            <!-- End mobile menu toggle-->
+          </li>
+        </ul>
+      </div>
+      <!-- <li class="float-right dropdown notification-list list-inline-item" style="margin-top: 18px;">
              <div class="dropdown notification-list nav-pro-img">
                      <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
              </div>
              </li>  -->
-          <!-- end menu-extras -->
-          <div class="clearfix"></div>
-       </div>
-       <!-- end container -->
+      <!-- end menu-extras -->
+      <div class="clearfix"></div>
     </div>
-    <!-- end topbar-main -->
-    <div class="navbar-custom">
-       <div class="container-fluid">
-          <div id="navigation">
-             <!-- Navigation Menu-->
-             <ul class="navigation-menu">
-                <li class="has-submenu"><a routerLink="/home/dashboard"><i class="ti-home"></i>Dashboard</a></li>
-                <li *ngIf="service.isInRole(['Branch Desk Officer','Admin'])" class="has-submenu"><a
-                   routerLink="/home/entryform"><i class="ti-agenda"></i>Entry Form</a></li>
-             
-               
-                <li *ngIf="service.isInRole(['Branch Desk Officer','Branch Investment Incharge','Branch Deputy Manager','Branch Manager','Admin'])"
-                   class="has-submenu"><a routerLink="/home/approvedApplication"><i
-                   class="ti-check-box"></i>Approved Applications</a></li>
-                <li *ngIf="service.isInRole(['UserMaker','Admin'])" class="has-submenu">
-                  <a  routerLink="/home/dashboard"><i class="ti-user"></i>User Management</a>
+    <!-- end container -->
+  </div>
+  <!-- end topbar-main -->
+  <div class="navbar-custom">
+    <div class="container-fluid">
+      <div id="navigation">
+        <!-- Navigation Menu-->
+        <ul class="navigation-menu">
+          <li class="has-submenu">
+            <a routerLink="/home/dashboard"><i class="ti-home"></i>Dashboard</a>
+          </li>
+          <li class="has-submenu">
+            <a routerLink="/home/entryform"
+              ><i class="ti-agenda"></i>Entry Form</a
+            >
+          </li>
 
-                   <ul class="submenu">
-                     <li *ngIf="service.isInRole(['Branch Desk Officer','Admin'])">
-                        <a routerLink="/home/unAuthUsers"><i class="ti-user"></i>Create Application User</a>
-                        <a   routerLink="/home/appusers"><i class="ti-user"></i>Application Users</a>
-                     </li>
-                  </ul>
-                  
-                  
-                  </li>
-             
-                <li *ngIf="service.isInRole(['Admin'])" class="has-submenu"><a routerLink="documentType"><i
-                   class="ti-layers-alt"></i>Document Type</a></li>
-                <!--  -->
-                <li *ngIf="service.isInRole(['Admin','CIB_USER','CIB_ADMIN'])" class="has-submenu">
-                   <a
-                      routerLink="/home/dashboard"><i class="ti-harddrives"></i>CIB</a>
-                   <ul class="submenu">
-                      <li *ngIf="service.isInRole(['Admin','CIB_USER','CIB_ADMIN'])" class="has-submenu"><a
-                         routerLink="uploadCibFiles"><i class="ti-layers-alt"></i>Upload CIB Files</a></li>
-                      <li *ngIf="service.isInRole(['Admin','CIB_USER','CIB_ADMIN'])" class="has-submenu"><a
-                         routerLink="cibProcessList"><i class="ti-layers-alt"></i>CIB Process List</a></li>
-                   </ul>
-                </li>
-             </ul>
-             <!-- End navigation menu    -->
-          </div>
-          <!-- end #navigation -->
-       </div>
-       <!-- end container -->
+          <li class="has-submenu">
+            <a routerLink="/home/approvedApplication"
+              ><i class="ti-check-box"></i>Approved Applications</a
+            >
+          </li>
+          <li class="has-submenu">
+            <a routerLink="/home/dashboard"
+              ><i class="ti-user"></i>User Management</a
+            >
+
+            <ul class="submenu">
+              <li>
+                <a routerLink="/home/unAuthUsers"
+                  ><i class="ti-user"></i>Create Application User</a
+                >
+                <a routerLink="/home/appusers"
+                  ><i class="ti-user"></i>Application Users</a
+                >
+              </li>
+            </ul>
+          </li>
+
+          <li class="has-submenu">
+            <a routerLink="documentType"
+              ><i class="ti-layers-alt"></i>Document Type</a
+            >
+          </li>
+          <!--  -->
+          <li class="has-submenu">
+            <a routerLink="/home/dashboard"><i class="ti-harddrives"></i>CIB</a>
+            <ul class="submenu">
+              <li class="has-submenu">
+                <a routerLink="uploadCibFiles"
+                  ><i class="ti-layers-alt"></i>Upload CIB Files</a
+                >
+              </li>
+              <li class="has-submenu">
+                <a routerLink="cibProcessList"
+                  ><i class="ti-layers-alt"></i>CIB Process List</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- End navigation menu    -->
+      </div>
+      <!-- end #navigation -->
     </div>
- </header>
- <br />
- <!-- End Navigation Bar-->
- 
+    <!-- end container -->
+  </div>
+</header>
+<br />
+<!-- End Navigation Bar-->
