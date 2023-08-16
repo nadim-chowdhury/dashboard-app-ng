@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-forbidden',
   templateUrl: './forbidden.component.html',
-  styles: []
+  styles: [],
 })
 export class ForbiddenComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
