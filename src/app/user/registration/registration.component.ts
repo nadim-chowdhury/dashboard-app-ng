@@ -5,11 +5,10 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styles: []
+  styles: [],
 })
 export class RegistrationComponent implements OnInit {
-
-  constructor(public service: UserService, private toastr: ToastrService) { }
+  constructor(public service: UserService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.service.formModel.reset();
@@ -22,24 +21,26 @@ export class RegistrationComponent implements OnInit {
           this.service.formModel.reset();
           this.toastr.success('New user created!', 'Registration successful.');
         } else {
-          res.errors.forEach(element => {
+          res.errors.forEach((element) => {
             switch (element.code) {
               case 'DuplicateUserName':
-                this.toastr.error('Username is already taken','Registration failed.');
+                this.toastr.error(
+                  'Username is already taken',
+                  'Registration failed.'
+                );
                 break;
 
               default:
-              this.toastr.error(element.description,'Registration failed.');
+                this.toastr.error(element.description, 'Registration failed.');
                 break;
             }
           });
         }
       },
-      err => {
+      (err) => {
         console.log(err);
         this.toastr.error(err);
       }
     );
   }
-
 }

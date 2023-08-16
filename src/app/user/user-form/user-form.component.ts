@@ -11,15 +11,23 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styles: [],
 })
 export class UserFormComponent implements OnInit {
-  @Input() my_modal_title: string; // Add explicit type annotation
-  EmployeeInfo: any; // Change to 'any' if EmployeeInfo type is unknown
+  @Input() my_modal_title: string = '';
+  EmployeeInfo: any = null;
 
-  errorText: string; // Add explicit type annotation
-  @Input() id: string; // Add explicit type annotation
-  RoleList: any[] = []; // Change to 'any[]' if RoleList type is unknown
+  errorText: string = '';
+  @Input() id: string = '';
+  RoleList: any[] = [];
 
   dropdownList: any[] = [];
-  dropdownSettings: IDropdownSettings;
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'normalizedName',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true,
+  };
 
   ShowFilter = false;
   limitSelection = false;
@@ -27,6 +35,7 @@ export class UserFormComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
+    private roleService: RoleService,
     public service: UserService,
     private toastr: ToastrService,
     private commonService: CommonService
@@ -46,7 +55,6 @@ export class UserFormComponent implements OnInit {
   }
 
   getEmployeeId() {
-    // Get Employee Info
     const userName = this.service.formModel.controls['UserName'].value;
     if (userName) {
       this.commonService.getEmpInfo(userName).subscribe(
@@ -57,7 +65,7 @@ export class UserFormComponent implements OnInit {
             this.service.formModel.controls['Branch'].setValue(
               res.data.branchAndDivision
             );
-            this.errorText = ''; // Assign an empty string instead of null
+            this.errorText = '';
           } else {
             this.EmployeeInfo = null;
             this.service.formModel.controls['UserName'].setValue('');
@@ -72,15 +80,15 @@ export class UserFormComponent implements OnInit {
         }
       );
     } else {
-      this.errorText = ''; // Handle the case when userName is null or empty
+      this.errorText = '';
     }
   }
 
   onSubmit() {
     if (this.service) {
-      this.service.saveUser().subscribe(
+      this.service.saveUser()?.subscribe(
         (res: any) => {
-          if (res.isSuccessfull) {
+          if (res?.isSuccessfull) {
             this.toastr.warning('Data saved!', res.message);
           } else {
             this.toastr.error('Ops! Something went wrong!', res.message);
@@ -91,7 +99,7 @@ export class UserFormComponent implements OnInit {
         }
       );
     } else {
-      console.log('Service is not defined!'); // Handle the case when service is not defined
+      console.log('Service is not defined!');
     }
   }
 
@@ -108,9 +116,10 @@ export class UserFormComponent implements OnInit {
       }
     );
   }
-  getData(id, roleList) {
+
+  getData(id: string, roleList: any[]) {
     if (!this.service || !this.service.formModel) {
-      console.log('Service or formModel is not defined!'); // Handle the case when service or formModel is not defined
+      console.log('Service or formModel is not defined!');
       return;
     }
 
@@ -131,15 +140,14 @@ export class UserFormComponent implements OnInit {
           passwords.get('ConfirmPassword').setValue('00000');
         }
 
-        var dbRoles = [];
+        const dbRoles: any[] = [];
         if (obj.roles) {
-          obj.roles.forEach((element) => {
-            if (
-              roleList.filter((m) => m.normalizedName == element).length > 0
-            ) {
-              dbRoles.push(
-                roleList.filter((m) => m.normalizedName == element)[0]
-              );
+          obj.roles.forEach((element: string) => {
+            const matchingRoles = roleList.filter(
+              (m) => m.normalizedName === element
+            );
+            if (matchingRoles.length > 0) {
+              dbRoles.push(matchingRoles[0]);
             }
           });
           this.service.formModel.controls['selectedRoles'].setValue(dbRoles);
@@ -152,29 +160,71 @@ export class UserFormComponent implements OnInit {
   }
 
   onItemSelect(item: any) {
-    debugger;
-    //this.service.formModel.value.selectedRoles.push(item);
-    //this.service.userSelectedRoles.push(item);
-    //  this.service.formModel.controls['selectedRoles'].setValue(
-    //    this.service.formModel.value.selectedRoles.push(item));
+    if (!this.service) {
+      console.log('Service is not defined!');
+      return;
+    }
+
+    if (!this.service.formModel) {
+      console.log('Form model is not defined!');
+      return;
+    }
+
+    this.service.formModel.value.selectedRoles.push(item);
+
+    if (this.service.userSelectedRoles) {
+      this.service.userSelectedRoles.push(item);
+    }
+
+    this.service.formModel.controls['selectedRoles'].setValue(
+      this.service.formModel.value.selectedRoles
+    );
   }
-  onSelectAll(items: any) {
-    // items.forEach(element => {
-    //   //this.service.userSelectedRoles.push(element);
-    //   this.service.formModel.controls['selectedRoles'].setValue(element);
-    // });
+
+  onSelectAll(items: any[]) {
+    if (!this.service) {
+      console.log('Service is not defined!');
+      return;
+    }
+
+    const selectedRoles = this.service.formModel.controls['selectedRoles'];
+    if (!selectedRoles) {
+      console.log('Selected roles control is not defined!');
+      return;
+    }
+
+    items.forEach((element: any) => {
+      selectedRoles.setValue(element);
+    });
   }
 
-  //   onDeSelect(item: any) {
-  //     var result =  this.service.formModel.value.selectedRoles
-  //     var filtered = result.filter(m => m.normalizedName !== item.normalizedName);
-  //     this.service.formModel.controls['selectedRoles'].setValue(filtered);
+  onDeSelect(item: any) {
+    if (!this.service) {
+      console.log('Service is not defined!');
+      return;
+    }
 
-  // }
-  // onDeSelectAll() {
+    const selectedRoles = this.service.formModel.get('selectedRoles');
+    if (!selectedRoles || !Array.isArray(selectedRoles.value)) {
+      console.log('Selected roles control is not defined or not valid!');
+      return;
+    }
 
-  //   //this.service.userSelectedRoles =[];
-  //   this.service.formModel.controls['selectedRoles'].setValue([]);
+    const result: any[] = selectedRoles.value;
 
-  // }
+    const filtered = result.filter(
+      (m: any) => m.normalizedName !== item.normalizedName
+    );
+
+    selectedRoles.setValue(filtered);
+  }
+
+  onDeSelectAll() {
+    if (!this.service) {
+      console.log('Service is not defined!');
+      return;
+    }
+
+    this.service.formModel.controls['selectedRoles'].setValue([]);
+  }
 }

@@ -6,21 +6,21 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-role-form',
   templateUrl: './role-form.component.html',
-  styles: []
+  styles: [],
 })
 export class RoleFormComponent implements OnInit {
   Roles: any[];
   @Input() my_modal_title;
 
   @Input() id;
- 
+
   constructor(
     public activeModal: NgbActiveModal,
-     public service: UserService,
-     private toastr: ToastrService) {}
- 
+    public service: UserService,
+    private toastr: ToastrService
+  ) {}
+
   ngOnInit() {
-    
     this.getData();
   }
 
@@ -33,21 +33,19 @@ export class RoleFormComponent implements OnInit {
           this.toastr.error('Ops! Something went worng!', res.message);
         }
       },
-      err => {
+      (err) => {
         console.log(err);
       }
     );
   }
-  getData(){
+  getData() {
     this.service.getRoles().subscribe(
-      (res:any) =>{
-        this.Roles=res.data;
+      (res: any) => {
+        this.Roles = res.data;
       },
-      err =>{
+      (err) => {
         console.log(err);
       }
     );
   }
-
-
 }

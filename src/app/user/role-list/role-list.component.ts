@@ -3,14 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-role-list',
   templateUrl: './role-list.component.html',
-  styles: []
+  styles: [],
 })
-
 export class RoleListComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
