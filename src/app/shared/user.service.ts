@@ -20,7 +20,7 @@ export class UserService {
     this.userRoles = localStorage.getItem('UserRoles');
   }
 
-  readonly BaseURI = this.config.apiEndpoint;
+  // readonly BaseURI = this.config.apiEndpoint;
 
   formModel = this.fb.group({
     Id: [''],
@@ -154,78 +154,80 @@ export class UserService {
   //   }
   // }
 
-  delete(id: string) {
-    return this.http.delete(this.BaseURI + 'UnAuthApplicationUser' + '/' + id);
-  }
+  // delete(id: string) {
+  //   return this.http.delete(this.BaseURI + 'UnAuthApplicationUser' + '/' + id);
+  // }
 
-  authorizeUser(id: string) {
-    return this.http.get(
-      this.BaseURI + 'UnAuthApplicationUser' + '/AuthorizeUser?id=' + id
-    );
-  }
+  // authorizeUser(id: string) {
+  //   return this.http.get(
+  //     this.BaseURI + 'UnAuthApplicationUser' + '/AuthorizeUser?id=' + id
+  //   );
+  // }
 
-  changePassword() {
-    var body = {
-      Id: localStorage.getItem('UserID'),
-      Password: this.changePasswordModel.value.Passwords.Password,
-      OldPassword: this.changePasswordModel.value.OldPassword,
-    };
+  //   changePassword() {
+  //     var body = {
+  //       Id: localStorage.getItem('UserID'),
+  //       Password: this.changePasswordModel.value.Passwords.Password,
+  //       OldPassword: this.changePasswordModel.value.OldPassword,
+  //     };
 
-    return this.http.post(
-      this.BaseURI + 'ApplicationUser/ChangePassword',
-      body
-    );
-  }
+  //   return this.http.post(
+  //     this.BaseURI + 'ApplicationUser/ChangePassword',
+  //     body
+  //   );
+  // }
 
-  deleteUser(id: string) {
-    return this.http.get(
-      this.BaseURI + 'ApplicationUser/DeleteUser?userId=' + id
-    );
-  }
-  resetPassword(id: string) {
-    return this.http.get(
-      this.BaseURI + 'ApplicationUser/ResetPassword?userId=' + id
-    );
-  }
-  login(formData: string) {
-    return this.http.post(this.BaseURI + 'ApplicationUser/Login', formData);
-  }
+  // deleteUser(id: string) {
+  //   return this.http.get(
+  //     this.BaseURI + 'ApplicationUser/DeleteUser?userId=' + id
+  //   );
+  // }
 
-  getUserProfile() {
-    return this.http.get(this.BaseURI + 'UserProfile');
-  }
+  // resetPassword(id: string) {
+  //   return this.http.get(
+  //     this.BaseURI + 'ApplicationUser/ResetPassword?userId=' + id
+  //   );
+  // }
 
-  getAllUsers() {
-    return this.http.get(this.BaseURI + 'ApplicationUser/GetUsers');
-  }
+  // login(formData: string) {
+  //   return this.http.post(this.BaseURI + 'ApplicationUser/Login', formData);
+  // }
 
-  getAllUnAuthUsers() {
-    return this.http.get(this.BaseURI + 'UnAuthApplicationUser');
-  }
+  // getUserProfile() {
+  //   return this.http.get(this.BaseURI + 'UserProfile');
+  // }
 
-  getRoles() {
-    return this.http.get(this.BaseURI + 'ApplicationUser/GetRoles');
-  }
+  // getAllUsers() {
+  //   return this.http.get(this.BaseURI + 'ApplicationUser/GetUsers');
+  // }
 
-  inactiveUser(id: string, isActive: string) {
-    return this.http.get(
-      this.BaseURI +
-        'ApplicationUser/InActiveUser?userId=' +
-        id +
-        '&isActive=' +
-        isActive
-    );
-  }
+  // getAllUnAuthUsers() {
+  //   return this.http.get(this.BaseURI + 'UnAuthApplicationUser');
+  // }
 
-  unlock(id: string) {
-    return this.http.get(
-      this.BaseURI + 'ApplicationUser/UnlockUser?userId=' + id
-    );
-  }
+  // getRoles() {
+  //   return this.http.get(this.BaseURI + 'ApplicationUser/GetRoles');
+  // }
 
-  getData(id: string) {
-    return this.http.get(this.BaseURI + 'ApplicationUser/GetUser?id=' + id);
-  }
+  // inactiveUser(id: string, isActive: string) {
+  //   return this.http.get(
+  //     this.BaseURI +
+  //       'ApplicationUser/InActiveUser?userId=' +
+  //       id +
+  //       '&isActive=' +
+  //       isActive
+  //   );
+  // }
+
+  // unlock(id: string) {
+  //   return this.http.get(
+  //     this.BaseURI + 'ApplicationUser/UnlockUser?userId=' + id
+  //   );
+  // }
+
+  // getData(id: string) {
+  //   return this.http.get(this.BaseURI + 'ApplicationUser/GetUser?id=' + id);
+  // }
 
   // roleMatch(allowedRoles: string): boolean {
   //   var isMatch = false;

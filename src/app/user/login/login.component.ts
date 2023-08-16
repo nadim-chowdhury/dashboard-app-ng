@@ -31,34 +31,32 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.service.login(form.value).subscribe(
-      (res: any) => {
-        // let tokenInfo = this.getDecodedAccessToken(res.token);
-
-        // localStorage.setItem('role', tokenInfo.role);
-        // localStorage.setItem('token', res.token);
-        // localStorage.setItem('userFullName', tokenInfo.UserFullName);
-        // localStorage.setItem('UserID', tokenInfo.UserID);
-        // localStorage.setItem('UserRoles', tokenInfo.UserRoles);
-        // this._compiler.clearCache();
-
-        this.router
-          .navigateByUrl('/user/login', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate(['/home/dashboard']);
-          });
-      },
-      (err) => {
-        if (err.status == 400) {
-          console.log(err);
-          console.log(err.error);
-          this.toastr.error('Login failed!', err.error.message);
-        } else {
-          this.toastr.error(err.message);
-          console.log(err);
-        }
-      }
-    );
+    // this.service.login(form.value).subscribe(
+    //   (res: any) => {
+    // let tokenInfo = this.getDecodedAccessToken(res.token);
+    // localStorage.setItem('role', tokenInfo.role);
+    // localStorage.setItem('token', res.token);
+    // localStorage.setItem('userFullName', tokenInfo.UserFullName);
+    // localStorage.setItem('UserID', tokenInfo.UserID);
+    // localStorage.setItem('UserRoles', tokenInfo.UserRoles);
+    // this._compiler.clearCache();
+    //     this.router
+    //       .navigateByUrl('/user/login', { skipLocationChange: true })
+    //       .then(() => {
+    //         this.router.navigate(['/home/dashboard']);
+    //       });
+    //   },
+    //   (err) => {
+    //     if (err.status == 400) {
+    //       console.log(err);
+    //       console.log(err.error);
+    //       this.toastr.error('Login failed!', err.error.message);
+    //     } else {
+    //       this.toastr.error(err.message);
+    //       console.log(err);
+    //     }
+    //   }
+    // );
   }
 
   // getDecodedAccessToken(token: string): any {

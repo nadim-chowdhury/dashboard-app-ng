@@ -21,7 +21,7 @@ export class RoleFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getData();
+    // this.getData();
   }
 
   onSubmit() {
@@ -39,14 +39,14 @@ export class RoleFormComponent implements OnInit {
     // );
   }
 
-  getData() {
-    this.service.getRoles().subscribe(
-      (res: any) => {
-        // this.Roles = res.data;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
+  // getData() {
+  //   this.service.getRoles().subscribe(
+  //     (res: any) => {
+  //       // this.Roles = res.data;
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
 }

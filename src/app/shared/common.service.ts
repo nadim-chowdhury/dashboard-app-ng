@@ -9,7 +9,7 @@ import * as moment from 'moment';
   providedIn: 'root',
 })
 export class CommonService {
-  readonly BaseURI = this.config.apiEndpoint;
+  // readonly BaseURI = this.config.apiEndpoint;
   constructor(
     private http: HttpClient,
     @Inject(APP_CONFIG) private config: AppConfig
@@ -20,12 +20,12 @@ export class CommonService {
     );
   }
   public getbranchList() {
-    return this.http.get(this.BaseURI + 'Common/GetBranchList');
+    // return this.http.get(this.BaseURI + 'Common/GetBranchList');
   }
   public getEmpInfo(empId: string) {
-    return this.http.get(
-      this.BaseURI + 'Common/GetEmployeeInfoById?empId=' + empId
-    );
+    // return this.http.get(
+    //   this.BaseURI + 'Common/GetEmployeeInfoById?empId=' + empId
+    // );
   }
 
   static dateVaidator(AC: AbstractControl) {

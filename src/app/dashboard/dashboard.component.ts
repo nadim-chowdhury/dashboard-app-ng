@@ -12,17 +12,17 @@ export class DashboardComponent implements OnInit {
   constructor(public service: CardapplicationService) {}
 
   ngOnInit() {
-    this.getData();
+    // this.getData();
   }
 
-  getData() {
-    this.service.getDashboardVM().subscribe(
-      (res: any) => {
-        this.dashboardVM = res.data;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
+  // getData() {
+  //   this.service.getDashboardVM().subscribe(
+  //     (res: any) => {
+  //       this.dashboardVM = res.data;
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
 }

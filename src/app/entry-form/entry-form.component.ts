@@ -85,101 +85,98 @@ export class EntryFormComponent implements OnInit {
 
   async getBranchList(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.commonService.getbranchList().subscribe(
-        (res: any) => {
-          resolve(res.data);
-        },
-        (err) => {
-          console.log(err);
-          reject(err);
-        }
-      );
+      // this.commonService.getbranchList().subscribe(
+      //   (res: any) => {
+      //     resolve(res.data);
+      //   },
+      //   (err) => {
+      //     console.log(err);
+      //     reject(err);
+      //   }
+      // );
     });
   }
   getEmployeeId() {
     // Get Employee Info
-    this.commonService
-      .getEmpInfo(this.service.formModel.controls['SourcedBy'].value)
-      .subscribe(
-        (res: any) => {
-          if (res.isSuccessfull) {
-            this.EmployeeInfo = res.data;
-            this.errorText = null;
-          } else {
-            this.EmployeeInfo = null;
-            this.service.formModel.controls['SourcedBy'].setValue('');
-            this.errorText = 'Invalid Employee Id !!!';
-          }
-        },
-        (err) => {
-          this.EmployeeInfo = null;
-          this.service.formModel.controls['SourcedBy'].setValue('');
-          this.errorText = 'Invalid Employee Id !!!';
-          console.log(err);
-        }
-      );
+    this.commonService;
+    // .getEmpInfo(this.service.formModel.controls['SourcedBy'].value)
+    // .subscribe(
+    //   (res: any) => {
+    //     if (res.isSuccessfull) {
+    //       this.EmployeeInfo = res.data;
+    //       this.errorText = null;
+    //     } else {
+    //       this.EmployeeInfo = null;
+    //       this.service.formModel.controls['SourcedBy'].setValue('');
+    //       this.errorText = 'Invalid Employee Id !!!';
+    //     }
+    //   },
+    //   (err) => {
+    //     this.EmployeeInfo = null;
+    //     this.service.formModel.controls['SourcedBy'].setValue('');
+    //     this.errorText = 'Invalid Employee Id !!!';
+    //     console.log(err);
+    //   }
+    // );
   }
 
   getEmployeeIdForRef() {
     // Get Employee Info
-    this.commonService
-      .getEmpInfo(this.service.formModel.controls['ReferenceName'].value)
-      .subscribe(
-        (res: any) => {
-          if (res.isSuccessfull) {
-            this.EmployeeInfo_ref = res.data;
-            this.errorText = null;
-          } else {
-            this.EmployeeInfo_ref = null;
-            this.service.formModel.controls['ReferenceName'].setValue('');
-            this.errorText = 'Invalid Employee Id !!!';
-          }
-        },
-        (err) => {
-          this.EmployeeInfo_ref = null;
-          this.service.formModel.controls['ReferenceName'].setValue('');
-          this.errorText = 'Invalid Employee Id !!!';
-          console.log(err);
-        }
-      );
+    this.commonService;
+    // .getEmpInfo(this.service.formModel.controls['ReferenceName'].value)
+    // .subscribe(
+    //   (res: any) => {
+    //     if (res.isSuccessfull) {
+    //       this.EmployeeInfo_ref = res.data;
+    //       this.errorText = null;
+    //     } else {
+    //       this.EmployeeInfo_ref = null;
+    //       this.service.formModel.controls['ReferenceName'].setValue('');
+    //       this.errorText = 'Invalid Employee Id !!!';
+    //     }
+    //   },
+    //   (err) => {
+    //     this.EmployeeInfo_ref = null;
+    //     this.service.formModel.controls['ReferenceName'].setValue('');
+    //     this.errorText = 'Invalid Employee Id !!!';
+    //     console.log(err);
+    //   }
+    // );
   }
 
   getcurrentValues(id: string) {
-    this.service.getApplicationDetailsAndBind(id).subscribe(
-      (res: any) => {
-        this.service.formModel.controls['Id'].setValue(res.data.id);
-        this.service.formModel.controls['SourceChannel'].setValue(
-          res.data.sourceChannel
-        );
-        this.service.formModel.controls['SourcedBy'].setValue(
-          res.data.sourcedBy
-        );
-
-        this.service.formModel.controls['FileNo'].setValue(res.data.fileNo);
-
-        this.service.formModel.controls['ReferenceName'].setValue(
-          res.data.referenceName
-        );
-        this.service.formModel.controls['CompanyId'].setValue(
-          res.data.companyId
-        );
-        this.service.formModel.controls['CompanyName'].setValue(
-          res.data.companyName
-        );
-
-        if (
-          this.service.formModel.controls['SourceChannel'].value != '' &&
-          this.service.formModel.controls['SourcedBy'].value != '' &&
-          this.SourceByList != null
-        ) {
-          this.sourceChannelOnChange();
-        }
-      },
-      (err) => {
-        this.resetWithDefault();
-        console.log(err);
-      }
-    );
+    // this.service.getApplicationDetailsAndBind(id).subscribe(
+    //   (res: any) => {
+    //     this.service.formModel.controls['Id'].setValue(res.data.id);
+    //     this.service.formModel.controls['SourceChannel'].setValue(
+    //       res.data.sourceChannel
+    //     );
+    //     this.service.formModel.controls['SourcedBy'].setValue(
+    //       res.data.sourcedBy
+    //     );
+    //     this.service.formModel.controls['FileNo'].setValue(res.data.fileNo);
+    //     this.service.formModel.controls['ReferenceName'].setValue(
+    //       res.data.referenceName
+    //     );
+    //     this.service.formModel.controls['CompanyId'].setValue(
+    //       res.data.companyId
+    //     );
+    //     this.service.formModel.controls['CompanyName'].setValue(
+    //       res.data.companyName
+    //     );
+    //     if (
+    //       this.service.formModel.controls['SourceChannel'].value != '' &&
+    //       this.service.formModel.controls['SourcedBy'].value != '' &&
+    //       this.SourceByList != null
+    //     ) {
+    //       this.sourceChannelOnChange();
+    //     }
+    //   },
+    //   (err) => {
+    //     this.resetWithDefault();
+    //     console.log(err);
+    //   }
+    // );
   }
 
   toUpper(event: any) {
@@ -193,89 +190,88 @@ export class EntryFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.service.formModel.valid) {
-      if (this.service.formModel.controls['Id'].value != null) {
-        this.service.save().subscribe(
-          (res: any) => {
-            if (res.isSuccessfull) {
-              this.toastr.warning(
-                'Data updated!',
-                'Record successfully updated.'
-              );
-            } else {
-              this.toastr.error('Ops! Something went worng!', res.message);
-            }
-          },
-          (err) => {
-            console.log(err);
-            this.toastr.error(err);
-          }
-        );
-      } else {
-        this.service.save().subscribe(
-          (res: any) => {
-            if (res.isSuccessfull) {
-              this.service.formModel.reset();
-              this.toastr.success('Data saved!', 'Record successfully saved.');
-              this.router.navigate(['/home/appDoc'], {
-                queryParams: {
-                  Id: res.data,
-                  HistoryId: '7a29c9dd-dad4-4ee0-ba2d-f5f75758fec4',
-                },
-              });
-            } else {
-              this.toastr.success('Ops! Something went worng!', res.message);
-            }
-          },
-          (err) => {
-            console.log(err);
-            this.toastr.error(err);
-          }
-        );
-      }
-    } else {
-      this.getFormValidationErrors();
-    }
+    // if (this.service.formModel.valid) {
+    //   if (this.service.formModel.controls['Id'].value != null) {
+    //     this.service.save().subscribe(
+    //       (res: any) => {
+    //         if (res.isSuccessfull) {
+    //           this.toastr.warning(
+    //             'Data updated!',
+    //             'Record successfully updated.'
+    //           );
+    //         } else {
+    //           this.toastr.error('Ops! Something went worng!', res.message);
+    //         }
+    //       },
+    //       (err) => {
+    //         console.log(err);
+    //         this.toastr.error(err);
+    //       }
+    //     );
+    //   } else {
+    //     this.service.save().subscribe(
+    //       (res: any) => {
+    //         if (res.isSuccessfull) {
+    //           this.service.formModel.reset();
+    //           this.toastr.success('Data saved!', 'Record successfully saved.');
+    //           this.router.navigate(['/home/appDoc'], {
+    //             queryParams: {
+    //               Id: res.data,
+    //               HistoryId: '7a29c9dd-dad4-4ee0-ba2d-f5f75758fec4',
+    //             },
+    //           });
+    //         } else {
+    //           this.toastr.success('Ops! Something went worng!', res.message);
+    //         }
+    //       },
+    //       (err) => {
+    //         console.log(err);
+    //         this.toastr.error(err);
+    //       }
+    //     );
+    //   }
+    // } else {
+    //   this.getFormValidationErrors();
+    // }
   }
 
   copyAddress(e: any) {
     this.checked = e;
     const formModelControls = this.service.formModel.controls;
 
-    if (this.checked) {
-      formModelControls['PermanentAddress1'].setValue(
-        formModelControls['ResidentialAddressLine1'].value
-      );
-      formModelControls['PermanentAddress2'].setValue(
-        formModelControls['ResidentialAddressLine2'].value
-      );
-      formModelControls['PermanentPostCode'].setValue(
-        formModelControls['ResidentialPostCode'].value
-      );
-      formModelControls['PermanentDistrict'].setValue(
-        formModelControls['ResidentialDistrict'].value
-      );
-    } else {
-      formModelControls['PermanentAddress1'].setValue('');
-      formModelControls['PermanentAddress2'].setValue('');
-      formModelControls['PermanentPostCode'].setValue('');
-      formModelControls['PermanentDistrict'].setValue('');
-    }
+    // if (this.checked) {
+    //   formModelControls['PermanentAddress1'].setValue(
+    //     formModelControls['ResidentialAddressLine1'].value
+    //   );
+    //   formModelControls['PermanentAddress2'].setValue(
+    //     formModelControls['ResidentialAddressLine2'].value
+    //   );
+    //   formModelControls['PermanentPostCode'].setValue(
+    //     formModelControls['ResidentialPostCode'].value
+    //   );
+    //   formModelControls['PermanentDistrict'].setValue(
+    //     formModelControls['ResidentialDistrict'].value
+    //   );
+    // } else {
+    //   formModelControls['PermanentAddress1'].setValue('');
+    //   formModelControls['PermanentAddress2'].setValue('');
+    //   formModelControls['PermanentPostCode'].setValue('');
+    //   formModelControls['PermanentDistrict'].setValue('');
+    // }
   }
 
   getFormValidationErrors() {
     Object.keys(this.service.formModel.controls).forEach((key) => {
-      const controlErrors: ValidationErrors | null =
-        this.service.formModel.get(key).errors;
-
-      if (controlErrors !== null) {
-        Object.keys(controlErrors).forEach((keyError) => {
-          const errors =
-            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ';
-          this.toastr.error(errors);
-          console.log(errors);
-        });
-      }
+      // const controlErrors: ValidationErrors | null =
+      //   this.service.formModel.get(key).errors;
+      // if (controlErrors !== null) {
+      //   Object.keys(controlErrors).forEach((keyError) => {
+      //     const errors =
+      //       'Key control: ' + key + ', keyError: ' + keyError + ', err value: ';
+      //     this.toastr.error(errors);
+      //     console.log(errors);
+      //   });
+      // }
     });
   }
 }

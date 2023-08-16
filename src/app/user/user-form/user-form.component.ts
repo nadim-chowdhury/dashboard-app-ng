@@ -42,7 +42,7 @@ export class UserFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getRoles();
+    // this.getRoles();
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'normalizedName',
@@ -57,28 +57,28 @@ export class UserFormComponent implements OnInit {
   getEmployeeId() {
     const userName = this.service.formModel.controls['UserName'].value;
     if (userName) {
-      this.commonService.getEmpInfo(userName).subscribe(
-        (res: any) => {
-          if (res.isSuccessfull) {
-            this.EmployeeInfo = res.data;
-            this.service.formModel.controls['FullName'].setValue(res.data.name);
-            this.service.formModel.controls['Branch'].setValue(
-              res.data.branchAndDivision
-            );
-            this.errorText = '';
-          } else {
-            this.EmployeeInfo = null;
-            this.service.formModel.controls['UserName'].setValue('');
-            this.errorText = 'Invalid Employee Id !!!';
-          }
-        },
-        (err) => {
-          this.EmployeeInfo = null;
-          this.service.formModel.controls['UserName'].setValue('');
-          this.errorText = 'Invalid Employee Id !!!';
-          console.log(err);
-        }
-      );
+      // this.commonService.getEmpInfo(userName).subscribe(
+      //   (res: any) => {
+      //     if (res.isSuccessfull) {
+      //       this.EmployeeInfo = res.data;
+      //       this.service.formModel.controls['FullName'].setValue(res.data.name);
+      //       this.service.formModel.controls['Branch'].setValue(
+      //         res.data.branchAndDivision
+      //       );
+      //       this.errorText = '';
+      //     } else {
+      //       this.EmployeeInfo = null;
+      //       this.service.formModel.controls['UserName'].setValue('');
+      //       this.errorText = 'Invalid Employee Id !!!';
+      //     }
+      //   },
+      //   (err: string) => {
+      //     this.EmployeeInfo = null;
+      //     this.service.formModel.controls['UserName'].setValue('');
+      //     this.errorText = 'Invalid Employee Id !!!';
+      //     console.log(err);
+      //   }
+      // );
     } else {
       this.errorText = '';
     }
@@ -103,19 +103,19 @@ export class UserFormComponent implements OnInit {
     // }
   }
 
-  getRoles() {
-    this.service.getRoles().subscribe(
-      (res: any) => {
-        this.RoleList = res.data;
-        if (this.id) {
-          this.getData(this.id, res.data);
-        }
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
+  // getRoles() {
+  //   this.service.getRoles().subscribe(
+  //     (res: any) => {
+  //       this.RoleList = res.data;
+  //       if (this.id) {
+  //         this.getData(this.id, res.data);
+  //       }
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
 
   getData(id: string, roleList: any[]) {
     if (!this.service || !this.service.formModel) {
@@ -123,40 +123,40 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
-    this.service.getData(id).subscribe(
-      (res: any) => {
-        const obj = res.data;
+    // this.service.getData(id).subscribe(
+    //   (res: any) => {
+    //     const obj = res.data;
 
-        this.service.formModel.controls['Id'].setValue(obj.id);
-        this.service.formModel.controls['UserName'].setValue(obj.userName);
-        this.service.formModel.controls['Email'].setValue(obj.email);
-        this.service.formModel.controls['Branch'].setValue(obj.branch);
-        this.service.formModel.controls['FullName'].setValue(obj.fullName);
-        this.service.formModel.controls['Role'].setValue(obj.normalizedName);
+    //     this.service.formModel.controls['Id'].setValue(obj.id);
+    //     this.service.formModel.controls['UserName'].setValue(obj.userName);
+    //     this.service.formModel.controls['Email'].setValue(obj.email);
+    //     this.service.formModel.controls['Branch'].setValue(obj.branch);
+    //     this.service.formModel.controls['FullName'].setValue(obj.fullName);
+    //     this.service.formModel.controls['Role'].setValue(obj.normalizedName);
 
-        const passwords = this.service.formModel.get('Passwords');
-        if (passwords) {
-          // passwords.get('Password').setValue('00000');
-          // passwords.get('ConfirmPassword').setValue('00000');
-        }
+    //     const passwords = this.service.formModel.get('Passwords');
+    //     if (passwords) {
+    //       // passwords.get('Password').setValue('00000');
+    //       // passwords.get('ConfirmPassword').setValue('00000');
+    //     }
 
-        const dbRoles: any[] = [];
-        if (obj.roles) {
-          obj.roles.forEach((element: string) => {
-            const matchingRoles = roleList.filter(
-              (m) => m.normalizedName === element
-            );
-            if (matchingRoles.length > 0) {
-              dbRoles.push(matchingRoles[0]);
-            }
-          });
-          // this.service.formModel.controls['selectedRoles'].setValue(dbRoles);
-        }
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    //     const dbRoles: any[] = [];
+    //     if (obj.roles) {
+    //       obj.roles.forEach((element: string) => {
+    //         const matchingRoles = roleList.filter(
+    //           (m) => m.normalizedName === element
+    //         );
+    //         if (matchingRoles.length > 0) {
+    //           dbRoles.push(matchingRoles[0]);
+    //         }
+    //       });
+    //       // this.service.formModel.controls['selectedRoles'].setValue(dbRoles);
+    //     }
+    //   },
+    //   (err: string) => {
+    //     console.log(err);
+    //   }
+    // );
   }
 
   onItemSelect(item: any) {

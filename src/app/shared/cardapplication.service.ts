@@ -18,7 +18,7 @@ export class CardapplicationService {
     @Inject(APP_CONFIG) private config: AppConfig
   ) {}
 
-  readonly BaseURI = this.config.apiEndpoint + 'CardApplicationData';
+  // readonly BaseURI = this.config.apiEndpoint + 'CardApplicationData';
 
   formModel = this.fb.group({
     Id: [''],
@@ -155,9 +155,9 @@ export class CardapplicationService {
       ReferenceName: this.formModel.value.ReferenceName,
     };
     if (this.formModel.value.Id != null) {
-      return this.http.put(this.BaseURI, body);
+      // return this.http.put(this.BaseURI, body);
     } else {
-      return this.http.post(this.BaseURI, body);
+      // return this.http.post(this.BaseURI, body);
     }
   }
   search(stageId: any) {
@@ -178,7 +178,7 @@ export class CardapplicationService {
       ApplicationStageId: stageId,
     };
 
-    return this.http.post(this.BaseURI + '/GetApplicationsWithStatusId', body);
+    // return this.http.post(this.BaseURI + '/GetApplicationsWithStatusId', body);
   }
 
   formatDate(date: any): string {
@@ -192,20 +192,20 @@ export class CardapplicationService {
   }
 
   delete(id: string) {
-    return this.http.delete(this.BaseURI + '/' + id);
+    // return this.http.delete(this.BaseURI + '/' + id);
   }
 
   changeStage(id: string, nextSerial: string) {
-    return this.http.get(
-      `${this.BaseURI}/ChangeStage?id=${id}&nextSerial=${nextSerial}`
-    );
+    // return this.http.get(
+    //   `${this.BaseURI}/ChangeStage?id=${id}&nextSerial=${nextSerial}`
+    // );
   }
 
   uploadFile(formData: FormData) {
-    return this.http.post(`${this.BaseURI}/FileUpload`, formData, {
-      reportProgress: true,
-      observe: 'events',
-    });
+    // return this.http.post(`${this.BaseURI}/FileUpload`, formData, {
+    //   reportProgress: true,
+    //   observe: 'events',
+    // });
   }
 
   giveOtherStatus(
@@ -214,45 +214,45 @@ export class CardapplicationService {
     sourceChannel: string,
     sourceBy: string
   ) {
-    return this.http.get(
-      `${this.BaseURI}/GiveOtherStatus?id=${id}&statusName=${statusName}&sourceChannel=${sourceChannel}&sourceBy=${sourceBy}`
-    );
+    // return this.http.get(
+    //   `${this.BaseURI}/GiveOtherStatus?id=${id}&statusName=${statusName}&sourceChannel=${sourceChannel}&sourceBy=${sourceBy}`
+    // );
   }
 
   receiveDocument(historyId: string) {
-    return this.http.get(
-      `${this.BaseURI}/ReceiveDocument?historyId=${historyId}`
-    );
+    // return this.http.get(
+    //   `${this.BaseURI}/ReceiveDocument?historyId=${historyId}`
+    // );
   }
 
   getApplicationDetails(id: string) {
-    return this.http.get(`${this.BaseURI}/${id}`);
+    // return this.http.get(`${this.BaseURI}/${id}`);
   }
 
   getWithStage(id: string, historyId: string) {
-    return this.http.get(
-      `${this.BaseURI}/GetWithStage?id=${id}&historyId=${historyId}`
-    );
+    // return this.http.get(
+    //   `${this.BaseURI}/GetWithStage?id=${id}&historyId=${historyId}`
+    // );
   }
 
   getApplicationDetailsAndBind(id: string) {
-    return this.http.get(`${this.BaseURI}/${id}`);
+    // return this.http.get(`${this.BaseURI}/${id}`);
   }
 
   getDashboardVM() {
-    return this.http.get(`${this.BaseURI}/GetDashboardVM`);
+    // return this.http.get(`${this.BaseURI}/GetDashboardVM`);
   }
 
   getApplicationsWithStatusId(statusId: string) {
-    return this.http.get(
-      `${this.BaseURI}/GetApplicationsWithStatusId?statusId=${statusId}`
-    );
+    // return this.http.get(
+    //   `${this.BaseURI}/GetApplicationsWithStatusId?statusId=${statusId}`
+    // );
   }
 
   getAllWithStatusForSingleApp(appId: string) {
-    return this.http.get(
-      `${this.BaseURI}/GetAllWithStatusForSingleApp?appId=${appId}`
-    );
+    // return this.http.get(
+    //   `${this.BaseURI}/GetAllWithStatusForSingleApp?appId=${appId}`
+    // );
   }
 
   saveInvestmentDetails(cardInfoId: string | number | null | undefined) {
@@ -274,11 +274,11 @@ export class CardapplicationService {
       Status: this.formModelInvestmentDetails.value.Status,
     };
 
-    return this.http.post(`${this.BaseURI}/SaveInvestmentDetails`, body);
+    // return this.http.post(`${this.BaseURI}/SaveInvestmentDetails`, body);
   }
 
   getInvestmentDetails(id: string | number) {
-    return this.http.get(`${this.BaseURI}/GetInvestmentDetails?id=${id}`);
+    // return this.http.get(`${this.BaseURI}/GetInvestmentDetails?id=${id}`);
   }
 
   // formModelContactPointVerification = this.fb.group({
@@ -303,7 +303,7 @@ export class CardapplicationService {
       CPV_Done_BY: this.formModelContactPointVerification.value.CPV_Done_BY,
     };
 
-    return this.http.post(`${this.BaseURI}/SaveContactPointVerification`, body);
+    // return this.http.post(`${this.BaseURI}/SaveContactPointVerification`, body);
   }
 
   saveCreditAnalystData() {
@@ -349,7 +349,7 @@ export class CardapplicationService {
       ApprovalAuthority: formValue.ApprovalAuthority,
     };
 
-    return this.http.post(this.BaseURI + '/SaveCreditAnalysData', body);
+    // return this.http.post(this.BaseURI + '/SaveCreditAnalysData', body);
   }
 
   // Call the function somewhere in your code
@@ -361,23 +361,23 @@ export class CardapplicationService {
   // });
 
   getContactPointVerification(id: string | number) {
-    return this.http.get(
-      `${this.BaseURI}/GetContactPointVerification?id=${id}`
-    );
+    // return this.http.get(
+    //   `${this.BaseURI}/GetContactPointVerification?id=${id}`
+    // );
   }
 
   getXML(id: string | number) {
-    return this.http.get(`${this.BaseURI}/GetXml?id=${id}`);
+    // return this.http.get(`${this.BaseURI}/GetXml?id=${id}`);
   }
 
   getApplicationsQuery(appId: string | number) {
-    return this.http.get(`${this.BaseURI}/GetApplicationQuery?appId=${appId}`);
+    // return this.http.get(`${this.BaseURI}/GetApplicationQuery?appId=${appId}`);
   }
 
   addApplicationsQuery(appId: string | number, message: string) {
-    return this.http.get(
-      `${this.BaseURI}/AddApplicationQuery?appId=${appId}&message=${message}`
-    );
+    // return this.http.get(
+    //   `${this.BaseURI}/AddApplicationQuery?appId=${appId}&message=${message}`
+    // );
   }
 
   toDate(dob: string, name: string) {

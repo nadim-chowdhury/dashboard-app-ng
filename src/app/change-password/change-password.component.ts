@@ -19,19 +19,19 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit() {
-    this.service.changePassword().subscribe(
-      (res: any) => {
-        if (res.isSuccessfull) {
-          this.service.changePasswordModel.reset();
-          this.toastr.warning('Data saved!', res.message);
-        } else {
-          this.toastr.error('Ops! Something went wrong!', res.message);
-        }
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
+  // onSubmit() {
+  //   this.service.changePassword().subscribe(
+  //     (res: any) => {
+  //       if (res.isSuccessfull) {
+  //         this.service.changePasswordModel.reset();
+  //         this.toastr.warning('Data saved!', res.message);
+  //       } else {
+  //         this.toastr.error('Ops! Something went wrong!', res.message);
+  //       }
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
 }
