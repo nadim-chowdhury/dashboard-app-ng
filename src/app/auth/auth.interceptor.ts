@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import * as jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -46,7 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
   getDecodedAccessToken(token: string): any {
     try {
       return jwt_decode(token);
-    } catch (Error) {
+    } catch (error) {
       return null;
     }
   }

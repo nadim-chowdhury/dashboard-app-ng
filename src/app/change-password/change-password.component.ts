@@ -1,49 +1,37 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { UserService } from '../shared/user.service';
 import { ToastrService } from 'ngx-toastr';
-
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styles: []
+  styles: [],
 })
 export class ChangePasswordComponent implements OnInit {
+  @Input() my_modal_title?: string;
+  EmployeeInfo: any;
 
-  @Input() my_modal_title;
-  EmployeeInfo;
+  errorText?: string;
+  @Input() id?: number;
+  RoleList: any[] = [];
 
-  errorText;
-  @Input() id;
-  RoleList =[];
-  constructor(
+  constructor(public service: UserService, private toastr: ToastrService) {}
 
-     public service: UserService,
-     private toastr: ToastrService) {}
- 
-  ngOnInit() {
-    
-  
-  }
-  
+  ngOnInit() {}
+
   onSubmit() {
     this.service.changePassword().subscribe(
       (res: any) => {
-        
         if (res.isSuccessfull) {
           this.service.changePasswordModel.reset();
           this.toastr.warning('Data saved!', res.message);
         } else {
-          this.toastr.error('Ops! Something went worng!', res.message);
+          this.toastr.error('Ops! Something went wrong!', res.message);
         }
       },
-      err => {
+      (err) => {
         console.log(err);
       }
     );
   }
-
-
-
 }

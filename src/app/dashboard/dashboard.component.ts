@@ -4,25 +4,25 @@ import { CardapplicationService } from '../shared/cardapplication.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styles: []
+  styles: [],
 })
 export class DashboardComponent implements OnInit {
-  dashboardVM;
-  constructor(public service : CardapplicationService) { }
+  dashboardVM: any;
+
+  constructor(public service: CardapplicationService) {}
 
   ngOnInit() {
     this.getData();
   }
-  getData(){
+
+  getData() {
     this.service.getDashboardVM().subscribe(
-      (res:any) =>{
-  
-        this.dashboardVM=res.data;
+      (res: any) => {
+        this.dashboardVM = res.data;
       },
-      err =>{
+      (err) => {
         console.log(err);
       }
     );
   }
-
 }
